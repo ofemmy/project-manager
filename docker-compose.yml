@@ -1,6 +1,5 @@
 version: "3.8"
-networks:
-  php-dev-environment:
+
 services:
   nginx:
     image: nginx:stable-alpine
@@ -8,13 +7,12 @@ services:
     ports:
     - "8088:80"
     volumes:
-    - ./src:/var/www/html
+    - ./:/var/www/html
     - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - php
       - mysql
-    networks:
-      php-dev-environment:
+
 
   mysql:
     image: mysql:5.7.22
@@ -32,8 +30,6 @@ services:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
       - SERVICE_TAGS=dev
       - SERVICE_NAME=mysql
-    networks:
-      php-dev-environment:
 
   php:
     build:
@@ -41,18 +37,23 @@ services:
       dockerfile: Dockerfile
     container_name: php
     volumes:
-    - ./src:/var/www/html
+    - ./:/var/www/html
     ports:
     - "9000:9000"
-    networks:
-      php-dev-environment:
 
   composer:
     image: composer:latest
     container_name: composer
     volumes:
-    - ./src:/var/www/html
+    - ./:/var/www/html
     working_dir: /var/www/html
-    networks:
-      php-dev-environment:
+
+  npm:
+    image: node:15.3.0-alpine3.10
+    container_name: npm
+    volumes:
+    - ./:/var/www/html
+    working_dir: /var/www/html
+    entrypoint: ['npm']
+
 
