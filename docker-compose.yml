@@ -1,0 +1,58 @@
+version: "3.8"
+networks:
+  php-dev-environment:
+services:
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx
+    ports:
+    - "8088:80"
+    volumes:
+    - ./src:/var/www/html
+    - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+      - mysql
+    networks:
+      php-dev-environment:
+
+  mysql:
+    image: mysql:5.7.22
+    container_name: mysql
+    restart: unless-stopped
+    tty: true
+    ports:
+    - "4306:3306"
+    volumes:
+    - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - SERVICE_TAGS=dev
+      - SERVICE_NAME=mysql
+    networks:
+      php-dev-environment:
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php
+    volumes:
+    - ./src:/var/www/html
+    ports:
+    - "9000:9000"
+    networks:
+      php-dev-environment:
+
+  composer:
+    image: composer:latest
+    container_name: composer
+    volumes:
+    - ./src:/var/www/html
+    working_dir: /var/www/html
+    networks:
+      php-dev-environment:
+
