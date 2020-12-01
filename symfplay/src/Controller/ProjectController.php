@@ -11,13 +11,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProjectController extends AbstractController
 {
     /**
-     * @Route("/project", name="project")
+     * @Route("/projects", name="project")
+     * @param ProjectRepository $projectRepository
+     * @return Response
      */
-    public function index(): Response
+    public function index(ProjectRepository $projectRepository): Response
     {
-        return $this->render('project/index.html.twig', [
-            'controller_name' => 'ProjectController',
-        ]);
+        $projects = $projectRepository->findAll();
+        return $this->render('project/index.html.twig', compact('projects'));
     }
 
     /**
