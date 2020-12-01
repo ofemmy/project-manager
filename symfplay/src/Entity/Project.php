@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\StatusTypeEnum;
 use App\Repository\ProjectRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -90,6 +91,9 @@ class Project
 
     public function setStatus(string $status): self
     {
+        if (!in_array($status, StatusTypeEnum::getAvalableStatusTypes())){
+            throw new \InvalidArgumentException("Invalid Type");
+        }
         $this->status = $status;
 
         return $this;

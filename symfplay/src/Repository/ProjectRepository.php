@@ -19,6 +19,37 @@ class ProjectRepository extends ServiceEntityRepository
         parent::__construct($registry, Project::class);
     }
 
+    private function withTasks($projectId=null)
+    {
+        $qb= $this->createQueryBuilder("p")
+                    ->addSelect("t");
+            if ($projectId) {
+                $qb->innerJoin("p.tasks","t",
+                    "WITH", "p.id=:projectId");
+                $qb->setParameter("projectId",$projectId);
+            } else{
+               $qb->innerJoin("p.tasks","t");
+            }
+            $query =  $qb->getQuery();
+            return $query->getResult();
+    }
+
+    /**
+     * @return Project[]| null Returns an array of Project objects
+      */
+    public function fetchAllProjectsWithTasks()
+    {
+        return $this->withTasks();
+    }
+
+    /**
+     * @param $projectId
+     * @return Project| null Returns an array of Project objects
+     */
+    public function fetchProjectByIdWithTasks($projectId)
+    {
+       return $this->withTasks($projectId);
+    }
     // /**
     //  * @return Project[] Returns an array of Project objects
     //  */

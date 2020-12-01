@@ -23,6 +23,8 @@ class ProjectController extends AbstractController
 
     /**
      * @Route("/create",name="project-create")
+     * @param ProjectRepository $projectRepository
+     * @return Response
      */
     public function create(ProjectRepository $projectRepository)
     {

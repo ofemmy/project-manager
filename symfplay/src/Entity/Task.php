@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\StatusTypeEnum;
 use App\Repository\TaskRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -62,6 +63,9 @@ class Task
 
     public function setStatus(string $status): self
     {
+        if (!in_array($status, StatusTypeEnum::getAvalableStatusTypes())){
+            throw new \InvalidArgumentException("Invalid Type");
+        }
         $this->status = $status;
 
         return $this;

@@ -8,7 +8,7 @@
         <a href="" class="mr-4">In Progress</a>
         <a href="" class="mr-4">Completed</a>
     </div>
-    <a href="/new" class="bg-red-400 px-4 py-2 rounded-sm hover:bg-red-300 text-white">Create Project</a>
+    <a href="/new" class="bg-gray-700 px-4 py-3 rounded-sm hover:bg-red-300 text-white">Create Project</a>
 </div>
     {% if projects %}
 
@@ -17,6 +17,7 @@
             <div class="bg-white rounded-sm p-4" style="width: 300px; height: 300px">
                 <h3>{{ project.title }}</h3>
                 <p>{{ project.description }}</p>
+                <p>Tasks - {{ project.tasks|length }}</p>
             </div>
         {% endfor %}
     </div>

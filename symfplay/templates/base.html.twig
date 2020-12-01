@@ -8,26 +8,22 @@
             {{ encore_entry_link_tags('tailwind') }}
         {% endblock %}
     </head>
-    <body class="bg-gray-100 flex flex h-screen text-gray-600">
+    <body class="bg-gray-100 flex flex h-screen text-gray-600 antialiased">
     {% set path = app.request.pathInfo %}
     {#Sidebar start#}
-    <div class="w-1/5 flex-none rounded-md" style="background-color: #FDFEFF">
-        <div class="mt-24 py-3 px-5 bg-gradient-to-r hover:from-blue-100
-         hover:to-blue-300 border-r-4 border-white hover:border-blue-400 uppercase
-        {% if path=="/projects" %} bg-blue-100 border-blue-400 {% endif %}"
+    <div class="w-1/5 bg-gray-700 flex-none text-white">
+        <div class="mt-24 py-3 px-5 hover:bg-gray hover:text-gray-600 uppercase
+        {% if path=="/test" %} bg-gray-100 text-gray-600 {% endif %}"
         >
             <a href="/">Dashboard</a>
         </div>
-        <div class="py-3 px-5 bg-gradient-to-r hover:from-blue-100
-         hover:to-blue-300 border-r-4 border-white hover:border-blue-400 uppercase">
+        <div class="py-3 px-5 hover:text-red-500 uppercase">
             <a href="/" class="w-100">My Projects</a>
         </div>
-        <div class="py-3 px-5 bg-gradient-to-r hover:from-blue-100
-         hover:to-blue-300 border-r-4 border-white hover:border-blue-400 uppercase">
+        <div class="py-3 px-5 hover:text-red-500 uppercase">
             <a href="/">Settings</a>
         </div>
-        <div class="py-3 px-5 bg-gradient-to-r hover:from-blue-100
-         hover:to-blue-300 border-r-4 border-white hover:border-blue-400 uppercase">
+        <div class="py-3 px-5 hover:text-red-500 uppercase">
             <a href="/">Logout</a>
         </div>
     </div>
@@ -48,7 +44,7 @@
            </div>
            {#Search Box end#}
             {#Avatar start#}
-           <div class="rounded-full h-10 w-10 flex items-center justify-center bg-blue-400">
+           <div class="rounded-full h-10 w-10 flex items-center justify-center bg-red-400">
                HJ
            </div>
                {#Avatar End#}
