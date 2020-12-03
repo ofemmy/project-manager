@@ -6,15 +6,17 @@
 
     abstract class StatusTypeEnum
     {
-    const STATUS_ONGOING="ongoing";
-    const STATUS_DONE="done";
-    const STATUS_OVERDUE="overdue";
+        const STATUS_DRAFT ="draft";
+        const STATUS_ONGOING="ongoing";
+        const STATUS_DONE="done";
+        const STATUS_OVERDUE="overdue";
     
     /**@var array user friendly status name*/
     protected static $statusName = [
         self::STATUS_ONGOING=>"Ongoing",
         self::STATUS_DONE=>"Done",
         self::STATUS_OVERDUE=>"Overdue",
+        self::STATUS_DRAFT=>"Draft"
     ];
         /**
          * @param  string $statusShortName
@@ -35,7 +37,8 @@
             return [
                 self::STATUS_OVERDUE,
                 self::STATUS_DONE,
-                self::STATUS_ONGOING
+                self::STATUS_ONGOING,
+                self::STATUS_DRAFT
             ];
         }
     }

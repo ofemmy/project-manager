@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProjectController extends AbstractController
 {
     /**
-     * @Route("/projects", name="project")
+     * @Route("/projects", name="project_home")
      * @param ProjectRepository $projectRepository
      * @return Response
      */

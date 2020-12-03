@@ -33,7 +33,7 @@ class Project
     /**
      * @ORM\Column(type="string", length=20)
      */
-    private $status;
+    private $status="draft";
 
     /**
      * @ORM\Column(type="date")
